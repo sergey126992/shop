@@ -49,11 +49,11 @@ return [
         'user' => [
             'identityClass' => 'common\auth\Identity',
             'enableAutoLogin' => true,
-            'identityCookie' => [
+            /*'identityCookie' => [
                 'name' => '_identity',
                 'httpOnly' => true,
                 'domain' => $params['cookieDomain'],
-            ],
+            ],*/
             'loginUrl' => ['auth/login'],
         ],
         'session' => [
@@ -83,7 +83,7 @@ return [
     ],
     'as access' => [
         'class' => 'yii\filters\AccessControl',
-        'except' => ['auth/login', 'site/error'],
+        'except' => ['auth/login', 'site/error','auth/logout'],
         'rules' => [
             [
                 'allow' => true,

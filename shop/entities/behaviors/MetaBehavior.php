@@ -3,6 +3,7 @@
 namespace shop\entities\behaviors;
 
 use shop\entities\Meta;
+use shop\helpers\MyHelper;
 use yii\base\Behavior;
 use yii\base\Event;
 use yii\db\ActiveRecord;
@@ -17,7 +18,7 @@ class MetaBehavior extends Behavior
     public function events(): array
     {
         return [
-            ActiveRecord::EVENT_AFTER_FIND => 'onAfterFind',
+            ActiveRecord::EVENT_AFTER_FIND    => 'onAfterFind',
             ActiveRecord::EVENT_BEFORE_INSERT => 'onBeforeSave',
             ActiveRecord::EVENT_BEFORE_UPDATE => 'onBeforeSave',
         ];
@@ -25,6 +26,7 @@ class MetaBehavior extends Behavior
 
     public function onAfterFind(Event $event): void
     {
+
         $model = $event->sender;
         $meta = Json::decode($model->getAttribute($this->jsonAttribute));
         $model->{$this->attribute} = new Meta(

@@ -49,6 +49,9 @@ class WishlistController extends Controller
      */
     public function actionIndex()
     {
+        //\shop\helpers\MyHelper::myPrint(Yii::$app->params);
+        //\shop\helpers\MyHelper::myPrint(Yii::$app->id);
+
         $dataProvider = $this->products->getWishList(\Yii::$app->user->id);
 
         return $this->render('index', [

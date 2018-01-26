@@ -25,8 +25,8 @@ use shop\listeners\User\UserSignupConfirmedListener;
 use shop\listeners\User\UserSignupRequestedListener;
 use shop\repositories\events\EntityPersisted;
 use shop\repositories\events\EntityRemoved;
-use shop\services\newsletter\MailChimp;
-use shop\services\newsletter\Newsletter;
+//use shop\services\newsletter\MailChimp;
+//use shop\services\newsletter\Newsletter;
 use shop\services\sms\LoggedSender;
 use shop\services\sms\SmsRu;
 use shop\services\sms\SmsSender;
@@ -90,12 +90,12 @@ class SetUp implements BootstrapInterface
             new ShopInfo($app->name, $app->name, $app->params['frontendHostInfo']),
         ]);
 
-        $container->setSingleton(Newsletter::class, function () use ($app) {
+        /*$container->setSingleton(Newsletter::class, function () use ($app) {
             return new MailChimp(
                 new \DrewM\MailChimp\MailChimp($app->params['mailChimpKey']),
                 $app->params['mailChimpListId']
             );
-        });
+        });*/
 
         $container->setSingleton(SmsSender::class, function () use ($app) {
             return new LoggedSender(

@@ -70,7 +70,7 @@
             "version": "v4.7.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "url": "git@github.com:FortAwesome/Font-Awesome.git",
                 "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687"
             },
             "dist": {
@@ -194,7 +194,7 @@
             "version": "v2.0.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/yiisoft/jquery-pjax.git",
+                "url": "git@github.com:yiisoft/jquery-pjax.git",
                 "reference": "60728da6ade5879e807a49ce59ef9a72039b8978"
             },
             "dist": {
@@ -3532,12 +3532,12 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zhuravljov/yii2-queue.git",
+                "url": "https://github.com/yiisoft/yii2-queue.git",
                 "reference": "73f6e637e4f3491764f5959c7ff11a6af3de82b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zhuravljov/yii2-queue/zipball/73f6e637e4f3491764f5959c7ff11a6af3de82b1",
+                "url": "https://api.github.com/repos/yiisoft/yii2-queue/zipball/73f6e637e4f3491764f5959c7ff11a6af3de82b1",
                 "reference": "73f6e637e4f3491764f5959c7ff11a6af3de82b1",
                 "shasum": ""
             },
@@ -3602,6 +3602,7 @@
                 "redis",
                 "yii"
             ],
+            "abandoned": "yiisoft/yii2-queue",
             "time": "2017-05-03T21:24:36+00:00"
         }
     ],
@@ -3670,7 +3671,7 @@
             "version": "v0.11.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twitter/typeahead.js.git",
+                "url": "git@github.com:twitter/typeahead.js.git",
                 "reference": "588440f66559714280628a4f9799f0c4eb880a4a"
             },
             "dist": {
