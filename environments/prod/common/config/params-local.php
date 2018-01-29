@@ -1,10 +1,10 @@
 <?php
 return [
     'cookieValidationKey' => '',
-    'cookieDomain' => '.shop.dev',
-    'frontendHostInfo' => 'http://shop.dev',
-    'backendHostInfo' => 'http://backend.shop.dev',
-    'staticHostInfo' => 'http://static.shop.dev',
+    'cookieDomain' => '.shop.loc',
+    'frontendHostInfo' => 'http://shop.loc',
+    'backendHostInfo' => 'http://backend.shop.loc',
+    'staticHostInfo' => 'http://static.shop.loc',
     'mailChimpKey' => '',
     'mailChimpListId' => '',
     'smsRuKey' => '',

@@ -30,8 +30,14 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = 'home';
-        //\shop\helpers\MyHelper::myPrint(\Yii::$app->user->isGuest);
+
+        //call_user_func([$this,'call_back_example']);
 
         return $this->render('index');
     }
+/*
+    public function call_back_example(){
+        \shop\helpers\MyHelper::myPrint(\Yii::$app->user->id);
+
+    }*/
 }

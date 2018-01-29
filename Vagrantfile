@@ -2,10 +2,10 @@ require 'yaml'
 require 'fileutils'
 
 domains = {
-  frontend: 'shop.dev',
-  backend:  'backend.shop.dev',
-  api:      'api.shop.dev',
-  static:   'static.shop.dev'
+  frontend: 'shop.loc',
+  backend:  'backend.shop.loc',
+  api:      'api.shop.loc',
+  static:   'static.shop.loc'
 }
 config = {
   local: './vagrant/config/vagrant-local.yml',
