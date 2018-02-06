@@ -151,8 +151,6 @@ class ProductReadRepository
             ],
         ];
 
-        //MyHelper::myPrint($query);
-
         $response = $this->client->search([
             'index' => 'shop',
             'type' => 'products',
