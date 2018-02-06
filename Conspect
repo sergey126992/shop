@@ -1,0 +1,4 @@
+
+./yii search/reindex - reload indexing products
+
+curl -X GET - запуск скрипра по URL

@@ -9,6 +9,7 @@ use shop\entities\Shop\Product\Product;
 use shop\entities\Shop\Tag;
 use shop\forms\Shop\Search\SearchForm;
 use shop\forms\Shop\Search\ValueForm;
+use shop\helpers\MyHelper;
 use yii\data\ActiveDataProvider;
 use yii\data\DataProviderInterface;
 use yii\data\Pagination;
@@ -134,6 +135,24 @@ class ProductReadRepository
             ],
         ]);
 
+        $query =  [
+            'bool' => [
+                'must' => array_merge(
+                    array_filter([
+                        !empty($form->category) ? ['term' => ['categories' => $form->category]] : false,
+                        !empty($form->brand) ? ['term' => ['brand' => $form->brand]] : false,
+                        !empty($form->text) ? ['multi_match' => [
+                            'query' => $form->text,
+                            'fields' => [ 'name^3', 'description' ]
+                        ]] : false,
+                    ]),
+                    $this->getNestedQuery($form)
+                )
+            ],
+        ];
+
+        //MyHelper::myPrint($query);
+
         $response = $this->client->search([
             'index' => 'shop',
             'type' => 'products',
@@ -144,35 +163,7 @@ class ProductReadRepository
                 'sort' => array_map(function ($attribute, $direction) {
                     return [$attribute => ['order' => $direction === SORT_ASC ? 'asc' : 'desc']];
                 }, array_keys($sort->getOrders()), $sort->getOrders()),
-                'query' => [
-                    'bool' => [
-                        'must' => array_merge(
-                            array_filter([
-                                !empty($form->category) ? ['term' => ['categories' => $form->category]] : false,
-                                !empty($form->brand) ? ['term' => ['brand' => $form->brand]] : false,
-                                !empty($form->text) ? ['multi_match' => [
-                                    'query' => $form->text,
-                                    'fields' => [ 'name^3', 'description' ]
-                                ]] : false,
-                            ]),
-                            array_map(function (ValueForm $value) {
-                                return ['nested' => [
-                                    'path' => 'values',
-                                    'query' => [
-                                        'bool' => [
-                                            'must' => array_filter([
-                                                ['match' => ['values.characteristic' => $value->getId()]],
-                                                !empty($value->equal) ? ['match' => ['values.value_string' => $value->equal]] : false,
-                                                !empty($value->from) ? ['range' => ['values.value_int' => ['gte' => $value->from]]] : false,
-                                                !empty($value->to) ? ['range' => ['values.value_int' => ['lte' => $value->to]]] : false,
-                                            ]),
-                                        ],
-                                    ],
-                                ]];
-                            }, array_filter($form->values, function (ValueForm $value) { return $value->isFilled(); }))
-                        )
-                    ],
-                ],
+                'query' => $query
             ],
         ]);
 
@@ -195,6 +186,45 @@ class ProductReadRepository
             'sort' => $sort,
         ]);
     }
+
+    public function getNestedQuery(SearchForm $form)
+    {
+        return array_map(
+            function (ValueForm $value) {
+            return
+                array_values(
+                    array_filter([
+                        ['match' => ['values.characteristic' => $value->getId()]],
+                        !empty($value->from)  ? ['range' => ['values.value_int' => ['gte' => $value->from]]] : false,
+                        !empty($value->to)    ? ['range' => ['values.value_int' => ['lte' => $value->to]]] : false,
+                        !empty($value->equal) ? ['match' => ['values.value_string' => $value->equal]] : false,
+                    ]));
+             }, array_filter($form->values, function (ValueForm $value) { return $value->isFilled(); }));
+    }
+
+//    public function getNestedQuery(SearchForm $form)
+//    {
+//        $arr =  array_map(
+//            function (ValueForm $value) {
+//                return [
+//                    'nested' => [
+//                        'path' => 'values',
+//                        'query' => [
+//                            'bool' => [
+//                                'must' => array_filter([
+//                                    ['match' => ['values.characteristic' => $value->getId()]],
+//                                    !empty($value->equal) ? ['match' => ['values.value_string' => $value->equal]] : false,
+//                                    !empty($value->from) ? ['range' => ['values.value_int' => ['gte' => $value->from]]] : false,
+//                                    !empty($value->to) ? ['range' => ['values.value_int' => ['lte' => $value->to]]] : false,
+//                                ]),
+//                            ],
+//                        ],
+//                    ]];
+//            }, array_filter($form->values, function (ValueForm $value) { return $value->isFilled(); }));
+//
+//        return $arr;
+//
+//    }
 
     public function getWishList($userId): ActiveDataProvider
     {

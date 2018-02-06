@@ -31,7 +31,7 @@ class SiteController extends Controller
     {
         $this->layout = 'home';
 
-        call_user_func([$this,'call_back_example']);
+//          call_user_func([$this,'call_back_example']);
 
         return $this->render('index');
     }
