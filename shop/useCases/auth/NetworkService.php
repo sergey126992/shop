@@ -3,6 +3,7 @@
 namespace shop\useCases\auth;
 
 use shop\entities\User\User;
+use shop\helpers\MyHelper;
 use shop\repositories\UserRepository;
 
 class NetworkService

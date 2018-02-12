@@ -17,6 +17,7 @@ use yii\data\Sort;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 
 class ProductReadRepository
 {
@@ -151,6 +152,7 @@ class ProductReadRepository
             ],
         ];
 
+
         $response = $this->client->search([
             'index' => 'shop',
             'type' => 'products',
@@ -164,6 +166,8 @@ class ProductReadRepository
                 'query' => $query
             ],
         ]);
+
+        //MyHelper::myPrint($response);
 
         $ids = ArrayHelper::getColumn($response['hits']['hits'], '_source.id');
 

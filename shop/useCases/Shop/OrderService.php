@@ -9,6 +9,7 @@ use shop\entities\Shop\Order\DeliveryData;
 use shop\entities\Shop\Order\Order;
 use shop\entities\Shop\Order\OrderItem;
 use shop\forms\Shop\Order\OrderForm;
+use shop\helpers\MyHelper;
 use shop\repositories\Shop\DeliveryMethodRepository;
 use shop\repositories\Shop\OrderRepository;
 use shop\repositories\Shop\ProductRepository;
@@ -43,6 +44,8 @@ class OrderService
 
     public function checkout($userId, OrderForm $form): Order
     {
+
+
         $user = $this->users->get($userId);
 
         $products = [];
@@ -79,6 +82,7 @@ class OrderService
         );
 
         $this->transaction->wrap(function () use ($order, $products) {
+
             $this->orders->save($order);
             foreach ($products as $product) {
                 $this->products->save($product);

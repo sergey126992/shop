@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use shop\helpers\MyHelper;
 use yii\web\Controller;
 
 /**

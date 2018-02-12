@@ -8,6 +8,7 @@ use shop\forms\manage\Shop\Product\PhotosForm;
 use shop\forms\manage\Shop\Product\PriceForm;
 use shop\forms\manage\Shop\Product\ProductCreateForm;
 use shop\forms\manage\Shop\Product\ProductEditForm;
+use shop\helpers\MyHelper;
 use shop\useCases\manage\Shop\ProductManageService;
 use Yii;
 use shop\entities\Shop\Product\Product;
@@ -49,6 +50,8 @@ class ProductController extends Controller
      */
     public function actionIndex()
     {
+        //MyHelper::myPrint(\Yii::$app->user->can('user'));
+
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

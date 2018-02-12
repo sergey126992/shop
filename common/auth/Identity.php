@@ -5,6 +5,7 @@ namespace common\auth;
 use filsh\yii2\oauth2server\Module;
 use OAuth2\Storage\UserCredentialsInterface;
 use shop\entities\User\User;
+use shop\helpers\MyHelper;
 use shop\readModels\UserReadRepository;
 use Yii;
 use yii\web\IdentityInterface;
@@ -15,6 +16,7 @@ class Identity implements IdentityInterface, UserCredentialsInterface
 
     public function __construct(User $user)
     {
+
         $this->user = $user;
     }
 
