@@ -51,6 +51,8 @@ class AuthController extends Controller
 
                 $user = $this->authService->auth($form);
 
+                //changes for dev branch
+
                 Yii::$app->user->login(new Identity($user), $form->rememberMe ? 3600 * 24 * 30 : 0);
 
                 //MyHelper::myPrint(Yii::$app->user->can('admin'));
