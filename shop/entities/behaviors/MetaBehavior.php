@@ -3,7 +3,6 @@
 namespace shop\entities\behaviors;
 
 use shop\entities\Meta;
-use shop\helpers\MyHelper;
 use yii\base\Behavior;
 use yii\base\Event;
 use yii\db\ActiveRecord;
@@ -13,7 +12,7 @@ use yii\helpers\Json;
 class MetaBehavior extends Behavior
 {
     public $attribute = 'meta';
-    public $jsonAttribute = 'meta_json';
+    public $jsonAttribute = 'json';
 
     public function events(): array
     {
